@@ -1,4 +1,4 @@
-
+// Fetch hämta todos
   window.onload = function() {
     fetch('https://jsonplaceholder.typicode.com/todos')
       .then(response => response.json())
@@ -17,20 +17,6 @@
         }
       });
   }
-
-  fetch('https://jsonplaceholder.typicode.com/todos', {
-  method: 'POST',
-  body: JSON.stringify({
-    title: 'New Todo',
-    completed: false
-  }),
-  headers: {
-    "Content-type": "application/json; charset=UTF-8"
-  }
-})
-.then(response => response.json())
-.then(json => console.log(json))
-
 
   function addTodo() {
     var todoInput = document.getElementById("todoInput").value;
@@ -73,15 +59,30 @@
     });
   }
 
+  // Kan inte lägga till en tom todo
   function addTodo() {
     var todoInput = document.getElementById("todoInput").value;
     if (todoInput.trim() === "") {
       alert("Du kan inte lägga till en tom todo!");
     } else {
-      // Lägg till todo i listan
+      
     }
   }
 
+  // Skicka till databasen
+  fetch('https://jsonplaceholder.typicode.com/todos', {
+    method: 'POST',
+    body: JSON.stringify({
+      title: 'New Todo',
+      completed: false
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    }
+  })
+  .then(response => response.json())
+  .then(json => console.log(json))
+  
   
 
   
