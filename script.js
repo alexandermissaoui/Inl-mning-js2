@@ -1,5 +1,5 @@
-var todoList = document.getElementById("todoList");
-var listItem = document.createElement("li");
+const todoList = document.getElementById("todoList");
+const listItem = document.createElement("li");
 const submitBtn = document.querySelector("#addtodo");
 const todoInput = document.querySelector("#todoInput")
 const toDoArray= []
@@ -12,16 +12,16 @@ const id = toDoArray.length +1
       .then(response => response.json())
       .then(todos => {
         // Get the todo list element
-        var todoList = document.getElementById("todoList");
+        const todoList = document.getElementById("todoList");
         todos.forEach(todo => {
           toDoArray.push(todo)
         })
         console.log(toDoArray)
 
         // Iterate through the todos and add them to the list
-        for (var i = 0; i < todos.length; i++) {
-          var todo = todos[i];
-          var listItem = document.createElement("li");
+        for (let i = 0; i < todos.length; i++) {
+          let todo = todos[i];
+          let listItem = document.createElement("li");
           listItem.innerText = todo.title;
           listItem.setAttribute("data-id", todo.id);
           listItem.innerHTML += ' <button onclick="removeTodo(this)">Remove</button>';
@@ -79,8 +79,9 @@ const id = toDoArray.length +1
 
 // // submitBtn.addEventListener('click', addTodo)
   
+// remove todo
   function removeTodo(element) {
-    var todoId = element.parentNode.getAttribute("data-id");
+    const todoId = element.parentNode.getAttribute("data-id");
     fetch(`https://jsonplaceholder.typicode.com/todos/${todoId}`, {
       method: 'DELETE'
     }).then(response => {
@@ -90,12 +91,13 @@ const id = toDoArray.length +1
     });
   }
 
-  // Kan inte lägga till en tom todo
+  // Kan inte lägga till en tom todo meddelande
   function addTodo(e) {
     e.preventDefault()
-    var todoInput = document.getElementById("todoInput").value;
+    const todoInput = document.getElementById("todoInput").value;
     if (todoInput.trim() === "") {
       alert("Du kan inte lägga till en tom todo!");
+      return
     // } else {
       
     }
@@ -105,10 +107,18 @@ const id = toDoArray.length +1
 
       const newTodo = {
         userId: 11,
-        id: id,
-        title: todoInput.value,
+        // id: id,
+        title: todoInput,
         completed: false,
     }
+  // Lägg till i listan
+    let listItem = document.createElement("li");
+    listItem.innerText = todoInput;
+    // listItem.setAttribute("data-id", todo.id);
+    listItem.innerHTML += ' <button onclick="removeTodo(this)">Remove</button>';
+    todoList.appendChild(listItem);
+
+
   fetch('https://jsonplaceholder.typicode.com/todos', {
     method: 'POST',
     body: JSON.stringify(newTodo),
@@ -120,7 +130,7 @@ const id = toDoArray.length +1
   .then(json => {
     toDoArray.push(json)
     console.log(toDoArray)
-    console.log(newTodo)
+    console.log(json)
   })
  
   
@@ -134,3 +144,19 @@ const id = toDoArray.length +1
   validateTodo()
 }
   submitBtn.addEventListener('click', addTodo)
+
+  // function validateInput(todoInput) {
+  //   if (todoInput === '') {
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  // }
+
+//   För godkänt ska du göra följande:
+
+// (Klar) Använda Fetch när sidan laddas för att hämta hem todos från databasen till en lista som sedan ska visas på sidan
+// (Klar) Skapa ett formulär med en text input och en knapp där användare kan lägga till en ny todo. Denna input ska valideras så att det inte går att lägga till en tom todo.
+// (Klar) När den nya todon läggs till så ska du använda fetch för att göra en POST till databasen och sedan använda ditt response för att lägga till todon i listan.
+// (Klar) Det ska även skrivas ut en text som talar om för användaren vad som blivit fel om ingen text har skrivits in.
+// Det ska gå att ta bort en todo från listan och du ska även göra en DELETE mot databasen då.
