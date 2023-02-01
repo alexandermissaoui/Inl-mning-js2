@@ -110,3 +110,7 @@ let BASE_URL = "https://jsonplaceholder.typicode.com/todos/";
 // (Klar) När den nya todon läggs till så ska du använda fetch för att göra en POST till databasen och sedan använda ditt response för att lägga till todon i listan.
 // (Klar) Det ska även skrivas ut en text som talar om för användaren vad som blivit fel om ingen text har skrivits in.
 // (Klar) Det ska gå att ta bort en todo från listan och du ska även göra en DELETE mot databasen då.
+
+// För väl godkänt ska du göra följande:
+
+// (Klar) Du ska även begränsa hämtningen av antal todos från databasen när sidan laddas till 7 stycken med hjälp av en URL query.
