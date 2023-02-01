@@ -84,12 +84,19 @@ const id = toDoArray.length +1
     const todoId = element.parentNode.getAttribute("data-id");
     fetch(`https://jsonplaceholder.typicode.com/todos/${todoId}`, {
       method: 'DELETE'
+      
     }).then(response => {
         if (response.ok) {
             element.parentNode.remove();
         }
+
+        // .find()
+        // todoInput.splice(index, 1) 
+        // const index = todos.findIndex(todo => todo.id == findIndex)
+        // e.target.parentElement.id 
     });
   }
+  
 
   // Kan inte lägga till en tom todo meddelande
   function addTodo(e) {
@@ -145,7 +152,24 @@ const id = toDoArray.length +1
 }
   submitBtn.addEventListener('click', addTodo)
 
-  // function validateInput(todoInput) {
+//Kod för att ta bort en todo från listan:
+
+//Hämta indexet för den todo som ska tas bort
+let index = list.indexOf(todo);
+
+//Ta bort todo från listan med hjälp av indexet
+list.splice(index, 1);
+
+//Kod för att göra en DELETE mot databasen: 
+fetch('https://jsonplaceholder.typicode.com/todos' + todo.id, {  //Skicka en DELETE-request till URLen /todo/[todo-id] 
+    method: 'DELETE',  //Ange metoden DELETE för att ta bort resursen 
+    headers: {  //Skicka med headers som anger att vi skickar JSON-data 
+        'Content-Type': 'application/json'  
+    }  
+})   .then(res => res.json())  //Vänta på respons och parsa den till JSON-format   .then(data => console.log(data))  //Logga ut data från responsen
+  
+
+// function validateInput(todoInput) {
   //   if (todoInput === '') {
   //     return false;
   //   } else {
