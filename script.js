@@ -109,4 +109,4 @@ let BASE_URL = "https://jsonplaceholder.typicode.com/todos/";
 // (Klar) Skapa ett formulär med en text input och en knapp där användare kan lägga till en ny todo. Denna input ska valideras så att det inte går att lägga till en tom todo.
 // (Klar) När den nya todon läggs till så ska du använda fetch för att göra en POST till databasen och sedan använda ditt response för att lägga till todon i listan.
 // (Klar) Det ska även skrivas ut en text som talar om för användaren vad som blivit fel om ingen text har skrivits in.
-// Det ska gå att ta bort en todo från listan och du ska även göra en DELETE mot databasen då.
+// (Klar) Det ska gå att ta bort en todo från listan och du ska även göra en DELETE mot databasen då.
