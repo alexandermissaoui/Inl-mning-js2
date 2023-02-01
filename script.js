@@ -2,8 +2,11 @@ const todoList = document.getElementById("todoList");
 const listItem = document.createElement("li");
 const submitBtn = document.querySelector("#addtodo");
 const todoInput = document.querySelector("#todoInput")
+const clearText = document.querySelector('.todoInput');
+const errorMessage = document.querySelector("#errorMessage")
 const toDoArray= []
 const id = toDoArray.length +1
+let BASE_URL = "https://jsonplaceholder.typicode.com/todos/";
 
 
 // Fetch hämta todos
@@ -26,105 +29,60 @@ const id = toDoArray.length +1
           listItem.setAttribute("data-id", todo.id);
           listItem.innerHTML += ' <button onclick="removeTodo(this)">Remove</button>';
           todoList.appendChild(listItem);
-        }
-      });
+       }
+    });
   }
-
-  // function getTodo() {
-  //   var todoInput = document.getElementById("todoInput").value;
-  //   var errorMessage = document.getElementById("errorMessage");
-  //   if (!todoInput) {
-  //     errorMessage.innerText = "Please enter a todo";
-  //   } else {
-
-//       // Add the todo to the server
-//       const newTodo = {
-//         userId: 11,
-//         id: id,
-//         title: todoInput.value,
-//         completed: false,
-//     }
-
-//     fetch(BASE_URL, {
-//         method: 'POST',
-//         body: JSON.stringify(newTodo),
-//         headers: {
-//             'Content-type': 'application/json; charset=UTF-8',
-//         },
-//     })
-      
-//       fetch('https://jsonplaceholder.typicode.com/todos', {
-//         method: 'POST',
-//         body: JSON.stringify(newTodo),
-//         headers: {
-//           'Content-type': 'application/json; charset=UTF-8'
-//         },
-//       })
-//         .then(response => response.json())
-//         .then(todo => {
-//           // Add the todo to the list
-//          toDoArray.push(todo)
-//          console.log(newTodo)
-
-//           // listItem.innerText = todo.title;
-//           // listItem.setAttribute("data-id", todo.id);
-//           // listItem.innerHTML += ' <button onclick="removeTodo(this)">Remove</button>';
-//           // todoList.appendChild(listItem);
-
-//           errorMessage.innerText = "";
-//           document.getElementById("todoInput").value = "";
-//         });
-//     }
-//   }
 
 // // submitBtn.addEventListener('click', addTodo)
   
 // remove todo
   function removeTodo(element) {
     const todoId = element.parentNode.getAttribute("data-id");
-    fetch(`https://jsonplaceholder.typicode.com/todos/${todoId}`, {
+    fetch(BASE_URL + todoId, {
       method: 'DELETE'
       
     }).then(response => {
         if (response.ok) {
+          console.log(response)
+          const index = toDoArray.indexOf(todoId => todoId == index)
+          toDoArray.splice(index, 1)
+
             element.parentNode.remove();
         }
-
-        // .find()
-        // todoInput.splice(index, 1) 
-        // const index = todos.findIndex(todo => todo.id == findIndex)
-        // e.target.parentElement.id 
+        else {
+          console.log("Fetch failed")
+        }
     });
   }
-  
 
   // Kan inte lägga till en tom todo meddelande
   function addTodo(e) {
     e.preventDefault()
     const todoInput = document.getElementById("todoInput").value;
     if (todoInput.trim() === "") {
-      alert("Du kan inte lägga till en tom todo!");
+      // alert("Du kan inte lägga till en tom todo!");
+      errorMessage.classList.remove('d-none');
+
+
       return
-    // } else {
-      
+    // } else {  
     }
-  
+    errorMessage.classList.add('d-none');
 
   // Skicka till databasen
 
       const newTodo = {
         userId: 11,
-        // id: id,
         title: todoInput,
         completed: false,
     }
+
   // Lägg till i listan
     let listItem = document.createElement("li");
     listItem.innerText = todoInput;
     // listItem.setAttribute("data-id", todo.id);
     listItem.innerHTML += ' <button onclick="removeTodo(this)">Remove</button>';
     todoList.appendChild(listItem);
-
 
   fetch('https://jsonplaceholder.typicode.com/todos', {
     method: 'POST',
@@ -138,44 +96,12 @@ const id = toDoArray.length +1
     toDoArray.push(json)
     console.log(toDoArray)
     console.log(json)
+    console.log("clear text")
+    clearText.value = "";
   })
- 
   
-  function validateTodo() {
-    if (todoInput.value === 0 ) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-  validateTodo()
 }
   submitBtn.addEventListener('click', addTodo)
-
-//Kod för att ta bort en todo från listan:
-
-//Hämta indexet för den todo som ska tas bort
-let index = list.indexOf(todo);
-
-//Ta bort todo från listan med hjälp av indexet
-list.splice(index, 1);
-
-//Kod för att göra en DELETE mot databasen: 
-fetch('https://jsonplaceholder.typicode.com/todos' + todo.id, {  //Skicka en DELETE-request till URLen /todo/[todo-id] 
-    method: 'DELETE',  //Ange metoden DELETE för att ta bort resursen 
-    headers: {  //Skicka med headers som anger att vi skickar JSON-data 
-        'Content-Type': 'application/json'  
-    }  
-})   .then(res => res.json())  //Vänta på respons och parsa den till JSON-format   .then(data => console.log(data))  //Logga ut data från responsen
-  
-
-// function validateInput(todoInput) {
-  //   if (todoInput === '') {
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // }
 
 //   För godkänt ska du göra följande:
 
