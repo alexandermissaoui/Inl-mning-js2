@@ -8,8 +8,7 @@ const toDoArray= []
 const id = toDoArray.length +1
 let BASE_URL = "https://jsonplaceholder.typicode.com/todos/";
 
-
-// Fetch hämta todos
+// Fetch get todos
   window.onload = function() {
     fetch('https://jsonplaceholder.typicode.com/todos?_limit=7')
       .then(response => response.json())
@@ -32,8 +31,6 @@ let BASE_URL = "https://jsonplaceholder.typicode.com/todos/";
        }
     });
   }
-
-// // submitBtn.addEventListener('click', addTodo)
   
 // remove todo
   function removeTodo(element) {
@@ -55,29 +52,25 @@ let BASE_URL = "https://jsonplaceholder.typicode.com/todos/";
     });
   }
 
-  // Kan inte lägga till en tom todo meddelande
+  // Validation no empty todo
   function addTodo(e) {
     e.preventDefault()
     const todoInput = document.getElementById("todoInput").value;
     if (todoInput.trim() === "") {
-      // alert("Du kan inte lägga till en tom todo!");
       errorMessage.classList.remove('d-none');
-
-
       return
     // } else {  
     }
     errorMessage.classList.add('d-none');
 
-  // Skicka till databasen
-
+  // Send to API
       const newTodo = {
         userId: 11,
         title: todoInput,
         completed: false,
     }
 
-  // Lägg till i listan
+  // Add to the list
     let listItem = document.createElement("li");
     listItem.innerText = todoInput;
     // listItem.setAttribute("data-id", todo.id);
@@ -99,18 +92,5 @@ let BASE_URL = "https://jsonplaceholder.typicode.com/todos/";
     console.log("clear text")
     clearText.value = "";
   })
-  
 }
   submitBtn.addEventListener('click', addTodo)
-
-//   För godkänt ska du göra följande:
-
-// (Klar) Använda Fetch när sidan laddas för att hämta hem todos från databasen till en lista som sedan ska visas på sidan
-// (Klar) Skapa ett formulär med en text input och en knapp där användare kan lägga till en ny todo. Denna input ska valideras så att det inte går att lägga till en tom todo.
-// (Klar) När den nya todon läggs till så ska du använda fetch för att göra en POST till databasen och sedan använda ditt response för att lägga till todon i listan.
-// (Klar) Det ska även skrivas ut en text som talar om för användaren vad som blivit fel om ingen text har skrivits in.
-// (Klar) Det ska gå att ta bort en todo från listan och du ska även göra en DELETE mot databasen då.
-
-// För väl godkänt ska du göra följande:
-
-// (Klar) Du ska även begränsa hämtningen av antal todos från databasen när sidan laddas till 7 stycken med hjälp av en URL query.

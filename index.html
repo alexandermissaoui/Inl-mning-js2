@@ -8,16 +8,25 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <div class="wrapper">
+    <div class="card">
     <form>
-        <label>New Todo:</label>
+     
         <input type="text" class="todoInput" id="todoInput">
-        <button id="addtodo" >Add Todo</button>
+        <button id="addtodo" >Add New Todo</button>
     </form>
-      <p id="errorMessage" class="d-none">You have to wright something to add a todo</p>
-      <ul id="todoList"></ul>
+    <div id="output">
 
-      
+        <!-- <div class="item">
+          <p>Mjölk</p>
+          <button>delete</button>
+        </div> -->
+        <p id="errorMessage" class="d-none">You have to wright something to add a todo</p>
+        <ul id="todoList"></ul>
+      </div>
+    </div>
+    </div>
+
 <script src="script.js"></script>
 </body>
 </html>
