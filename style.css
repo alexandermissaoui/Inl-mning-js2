@@ -16,17 +16,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(21, 21, 96);
+  background-color: rgb(3, 32, 55);
 }
 .card {
-  background-color: grey;
+  background-color: rgb(3, 50, 99);
   border-radius: 1rem;
   box-shadow: 2px 2px 5px 1px #00000042;
   overflow: hidden;
   width: 400px;
 }
 .card form {
-  background-color: #333;
+  background-color: rgb(2, 11, 31);
   padding: 1rem;
   display: flex;
 }
@@ -47,7 +47,7 @@
   transition: all 200ms ease-out;
 }
 .card form button:hover {
-  background-color: greenyellow;
+  background-color: rgb(0, 83, 89);
 }
 #output {
   height: 50vh;
